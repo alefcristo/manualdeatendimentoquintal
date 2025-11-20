@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Atendimento - Quintal Limpo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .script-box { border-left: 4px solid #10b981; transition: all 0.2s ease; }
+        .script-box:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .internal-note { border-left: 4px solid #f59e0b; background-color: #fffbeb; }
+        .tool-link { transition: all 0.2s; }
+        .tool-link:hover { transform: translateY(-1px); }
+        .sidebar-item.active { background-color: #d1fae5; color: #065f46; font-weight: 600; border-right: 3px solid #10b981; }
+        
+        /* Highlight para o seletor do passo 3 */
+        .selector-highlight {
+            background: linear-gradient(to right, #fff7ed, #ffedd5);
+            border: 2px solid #f97316;
+            box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.1);
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden; min-width: 250px; background-color: #333; color: #fff;
+            text-align: center; border-radius: 8px; padding: 12px; position: fixed;
+            z-index: 50; left: 50%; bottom: 30px; transform: translateX(-50%);
+            font-size: 14px; opacity: 0; transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white shadow-lg hidden md:flex flex-col z-10 h-full">
+        <div class="p-6 border-b border-gray-100">
+            <h1 class="text-xl font-bold text-green-700"><i class="fas fa-leaf mr-2"></i>Quintal Limpo</h1>
+            <p class="text-xs text-gray-500 mt-1">Manual de Atendimento MVP 2.0</p>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1">
+                <li><a href="#step-0" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">0. Premissas</a></li>
+                <li><a href="#step-1" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">1. Primeira Resposta</a></li>
+                <li><a href="#step-2" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">2. Verificação Interna</a></li>
+                <li><a href="#step-3" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">3. Detalhes do Serviço</a></li>
+                <li><a href="#step-4" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">4. Pagamento</a></li>
+                <li><a href="#step-5" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">5. Confirmação</a></li>
+                <li><a href="#step-6" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">6. Clube Quintal+</a></li>
+                <li><a href="#step-7" class="sidebar-item block px-6 py-3 text-gray-600 hover:bg-gray-50" onclick="setActive(this)">7. Encerramento</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth relative">
+        
+        <!-- Mobile Header -->
+        <div class="md:hidden mb-6"><h1 class="text-xl font-bold text-green-700">Quintal Limpo - Manual</h1></div>
+
+        <!-- STEP 0 -->
+        <section id="step-0" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">0</span>
+                Premissas Importantes
+            </h2>
+            <div class="internal-note p-4 rounded-r-lg shadow-sm text-gray-700 text-sm">
+                <p class="font-bold text-orange-600 mb-2"><i class="fas fa-info-circle mr-1"></i> ORIENTAÇÃO</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>O cliente chega via mensagem automática com aceite dos termos.</li>
+                    <li><strong>Seu papel:</strong> Verificar disponibilidade ➝ Confirmar detalhes ➝ Reforçar inclusos ➝ Cobrar ➝ Confirmar Profissional.</li>
+                    <li><strong>Regra de Ouro:</strong> Agendamento só é garantido após pagamento aprovado.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- STEP 1 -->
+        <section id="step-1" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">1</span>
+                Primeira Resposta
+            </h2>
+            <div class="bg-white p-1 rounded-lg shadow-md mb-2">
+                <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Enviar Imediatamente</span>
+                    <button onclick="copyToClipboard('msg-1')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                </div>
+                <div class="p-5 script-box bg-white">
+                    <p id="msg-1" class="whitespace-pre-line text-gray-800">Olá! 👋
+Obrigado por solicitar seu serviço com a Quintal Limpo.
+Já recebi todas as informações do seu pedido e agora vou verificar a disponibilidade de um profissional parceiro(a) para a data desejada.
+Um momento, por favor. 🌱</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section id="step-2" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">2</span>
+                Verificação do Profissional
+            </h2>
+            
+            <!-- LINK DA FERRAMENTA -->
+            <div class="mb-4">
+                <a href="https://gestaoprofissionaisparceiros.vercel.app/" target="_blank" class="tool-link flex items-center justify-between w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg shadow-md group">
+                    <div class="flex items-center">
+                        <div class="bg-blue-500 p-2 rounded-lg mr-3"><i class="fas fa-users-cog text-xl"></i></div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">Ferramenta de Gestão</p>
+                            <p class="text-xs text-blue-100">Cadastrar/Adicionar serviço do parceiro</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-external-link-alt ml-4"></i>
+                </a>
+            </div>
+
+            <div class="internal-note p-4 rounded-r-lg shadow-sm text-gray-700 text-sm">
+                <h3 class="font-bold text-gray-900 mb-2"><i class="fas fa-tasks mr-1"></i> Checklist Interno</h3>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li>Checar disponibilidade no grupo dos profissionais.</li>
+                    <li>Enviar mensagem individual aos profissionais adequados.</li>
+                    <li>Se ninguém responder, <strong>ligar</strong> para os prioritários.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section id="step-3" class="mb-10 scroll-mt-10 bg-gray-50 p-4 rounded-xl border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">3</span>
+                Confirmação & Detalhes
+            </h2>
+            
+            <!-- Mensagem Padrão -->
+            <div class="bg-white p-1 rounded-lg shadow-md mb-6">
+                <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase">Confirmação Inicial (Padrão)</span>
+                    <button onclick="copyToClipboard('msg-3-padrao')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                </div>
+                <div class="p-5 script-box bg-white">
+                    <p id="msg-3-padrao" class="whitespace-pre-line text-gray-800">Temos um profissional disponível para o dia X, no horário Y.
+Antes de confirmarmos, preciso só alinhar um detalhe rápido do serviço.</p>
+                </div>
+            </div>
+
+            <!-- SELETOR DE SERVIÇO COM DESTAQUE -->
+            <div class="mb-6 selector-highlight p-4 rounded-lg">
+                <label for="service-select" class="block text-orange-700 font-bold mb-2 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i> SELECIONE O CENÁRIO ESPECÍFICO:
+                </label>
+                <div class="relative">
+                    <select id="service-select" onchange="showServiceScript()" class="block w-full pl-3 pr-10 py-3 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md shadow-sm bg-white text-gray-800 font-medium">
+                        <option value="">-- Escolha o tipo de serviço aqui --</option>
+                        <option value="3a">3.A — Faxina Residencial (Sem Extras)</option>
+                        <option value="3b">3.B — Limpeza de Terreno (Sem Entulho)</option>
+                        <option value="3c">3.C — Limpeza de Terreno (Com Entulho)</option>
+                        <option value="3d">3.D — Limpeza de Piscina (Manutenção)</option>
+                        <option value="3e">3.E — Limpeza de Piscina (Choque/Verde)</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BLOCOS DE SERVIÇO -->
+            <!-- 3.A Faxina -->
+            <div id="content-3a" class="service-content hidden animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md border border-blue-200">
+                    <div class="p-3 bg-blue-50 border-b border-blue-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-blue-600 uppercase">Faxina Residencial (Sem Extras)</span>
+                        <button onclick="copyToClipboard('msg-3a')" class="text-blue-600 hover:text-blue-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-3a" class="whitespace-pre-line text-gray-800 text-sm">Como você selecionou a Faxina Básica sem extras, vou reforçar o que está incluso:
+🍳 Cozinha
+• Limpeza externa de armários
+• Lavar, secar e guardar louça básica (10 pratos, 6 copos, 6 talheres, 3 panelas médias)
+• Limpeza e organização da pia e bancadas
+• Limpeza externa de eletrodomésticos
+• Higienização do chão
+• Retirada do lixo
+• Limpeza de portas, rodapés e interruptores
+🛋️ Sala
+• Limpeza de pó
+• Organização geral
+• Aspiração/varrição/limpeza do chão
+• Limpeza de portas, rodapés e interruptores
+🛏️ Quartos
+• Arrumação da cama
+• Limpeza externa de móveis
+• Aspiração/varrição/limpeza do chão
+• Limpeza de portas, rodapés e interruptores
+🚿 Banheiros
+• Desinfecção do vaso sanitário
+• Limpeza da pia e espelho
+• Higienização do box e piso
+• Limpeza de portas, rodapés e interruptores
+• Organização dos materiais
+Podemos seguir com a versão básica mesmo?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3.B Terreno Sem Entulho -->
+            <div id="content-3b" class="service-content hidden animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md border border-green-200">
+                    <div class="p-3 bg-green-50 border-b border-green-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-green-600 uppercase">Terreno (Sem Entulho)</span>
+                        <button onclick="copyToClipboard('msg-3b')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-3b" class="whitespace-pre-line text-gray-800">Como você selecionou a Limpeza de Terreno sem remoção de entulho, seguem os pontos importantes:
+• É necessário ter disponível no local: enxada e rastelo
+• O corte do mato será realizado normalmente
+• O material será apenas amontoado no terreno, em local indicado pelo cliente
+Podemos seguir dessa forma?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3.C Terreno Com Entulho -->
+            <div id="content-3c" class="service-content hidden animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md border border-green-200">
+                    <div class="p-3 bg-green-50 border-b border-green-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-green-600 uppercase">Terreno (Com Entulho)</span>
+                        <button onclick="copyToClipboard('msg-3c')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-3c" class="whitespace-pre-line text-gray-800">Como você selecionou a Limpeza de Terreno com remoção de entulho, seguem os pontos importantes:
+• É necessário ter disponível no local: enxada, rastelo e carrinho de mão
+• O profissional transportará o material até o ponto de descarte mais próximo, desde que o carrinho seja fornecido
+• Este serviço não inclui descarte de entulho de obra ou resíduos pesados
+Está tudo certo por aí para continuarmos?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3.D Piscina Manutenção -->
+            <div id="content-3d" class="service-content hidden animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md border border-cyan-200">
+                    <div class="p-3 bg-cyan-50 border-b border-cyan-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-cyan-600 uppercase">Piscina (Manutenção)</span>
+                        <button onclick="copyToClipboard('msg-3d')" class="text-cyan-600 hover:text-cyan-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-3d" class="whitespace-pre-line text-gray-800">Como você selecionou a Limpeza de Manutenção, seguem os itens necessários:
+Equipamentos que precisam estar no local:
+• Cabo
+• Peneira
+• Flutuador
+Produtos necessários (cliente deve fornecer):
+✅ Limpeza Básica de Manutenção
+• Cloro (granulado ou pastilhas)
+• Clarificante
+• Elevador/Redutor de pH (se necessário)
+• Algicida de manutenção
+Você possui esses equipamentos e produtos disponíveis?</p>
+                    </div>
+                    <div class="p-3 bg-red-50 text-sm text-red-600 border-t border-red-100 flex flex-col gap-2">
+                        <strong>Se NÃO possuir:</strong>
+                        <div class="bg-white p-2 rounded border border-red-100 flex justify-between items-center">
+                            <span class="italic text-xs">"Como os itens necessários não estão disponíveis..."</span>
+                            <button onclick="copyToClipboard('msg-3d-neg')" class="text-red-600 hover:text-red-800 text-xs uppercase font-bold ml-2"><i class="far fa-copy"></i></button>
+                            <p id="msg-3d-neg" class="hidden">Como os itens necessários não estão disponíveis, não é possível seguir com o serviço agora.
+Mas posso te ajudar a reagendar quando estiver tudo pronto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3.E Piscina Choque -->
+            <div id="content-3e" class="service-content hidden animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md border border-cyan-200">
+                    <div class="p-3 bg-cyan-50 border-b border-cyan-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-cyan-600 uppercase">Piscina (Choque / Verde)</span>
+                        <button onclick="copyToClipboard('msg-3e')" class="text-cyan-600 hover:text-cyan-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-3e" class="whitespace-pre-line text-gray-800">Como você selecionou a Limpeza de Choque (Piscina Verde), seguem os itens necessários:
+Equipamentos necessários:
+• Cabo
+• Peneira
+• Flutuador
+Produtos necessários (cliente deve fornecer):
+🔷 Choque / Piscina Verde
+• Algicida de choque
+• Cloro de choque (concentrado)
+• Sulfato de alumínio ou clarificante
+• Barrilha ou elevador de alcalinidade
+• Redutor de pH (se necessário)
+Você possui esses equipamentos e produtos disponíveis?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: PAGAMENTO (Antigo 5) -->
+        <section id="step-4" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">4</span>
+                Pagamento
+            </h2>
+            
+            <div class="flex mb-4 border-b border-gray-200">
+                <button onclick="showPayment('pix')" id="tab-pix" class="payment-tab py-2 px-4 text-green-600 font-semibold border-b-2 border-green-500 focus:outline-none"><i class="fas fa-qrcode mr-2"></i>PIX</button>
+                <button onclick="showPayment('card')" id="tab-card" class="payment-tab py-2 px-4 text-gray-500 font-medium hover:text-green-600 focus:outline-none"><i class="far fa-credit-card mr-2"></i>Cartão de Crédito</button>
+            </div>
+
+            <!-- PIX Content -->
+            <div id="pay-pix" class="payment-content animate-fade-in">
+                <div class="bg-white p-1 rounded-lg shadow-md">
+                    <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-gray-500 uppercase">Script PIX</span>
+                        <button onclick="copyToClipboard('msg-pix')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-pix" class="whitespace-pre-line text-gray-800">Perfeito! Para garantir seu agendamento e reserva do profissional parceiro(a), basta realizar o pagamento via PIX.
+Assim que enviar o comprovante, finalizo o agendamento e confirmo o profissional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Content -->
+            <div id="pay-card" class="payment-content hidden animate-fade-in">
+                <div class="internal-note p-4 rounded mb-4 text-sm">
+                    <i class="fas fa-calculator mr-1"></i> <strong>Atenção:</strong> Simule a taxa do gateway antes.
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-md mb-4">
+                    <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-gray-500 uppercase">1. Oferta da Simulação</span>
+                        <button onclick="copyToClipboard('msg-card-1')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-card-1" class="whitespace-pre-line text-gray-800">Perfeito! Para pagamento no cartão, usamos um link de pagamento.
+A sua simulação com acréscimo ficou com valor final de R$ XXX,XX.
+Posso gerar o link para você agora?</p>
+                    </div>
+                </div>
+                <div class="bg-white p-1 rounded-lg shadow-md">
+                    <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <span class="text-xs font-bold text-gray-500 uppercase">2. Envio do Link</span>
+                        <button onclick="copyToClipboard('msg-card-2')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                    </div>
+                    <div class="p-5 script-box bg-white">
+                        <p id="msg-card-2" class="whitespace-pre-line text-gray-800">Aqui está o link de pagamento para concluir seu agendamento:
+(link)
+Assim que o pagamento for aprovado, confirmo o profissional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 5: CONFIRMAÇÃO (Antigo 6) -->
+        <section id="step-5" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">5</span>
+                Confirmação Final
+            </h2>
+            <div class="bg-white p-1 rounded-lg shadow-md mb-2">
+                <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Pagamento Recebido</span>
+                    <button onclick="copyToClipboard('msg-6')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                </div>
+                <div class="p-5 script-box bg-white">
+                    <p id="msg-6" class="whitespace-pre-line text-gray-800">Pagamento recebido com sucesso! 🙌
+Seu serviço está confirmado.
+O profissional que irá até sua casa é: (Nome do profissional).
+Ele chegará no dia X, entre Y e Z.
+Lembrando que preferencialmente o serviço deve ser acompanhado por você ou alguém indicado.
+Qualquer dúvida, estou aqui!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 6: CLUBE QUINTAL+ (Antigo 7) -->
+        <section id="step-6" class="mb-10 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">6</span>
+                Clube Quintal+
+            </h2>
+            
+            <!-- LINK DA FERRAMENTA -->
+            <div class="mb-4">
+                <a href="https://clubequintal.vercel.app/" target="_blank" class="tool-link flex items-center justify-between w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg shadow-md group">
+                    <div class="flex items-center">
+                        <div class="bg-purple-500 p-2 rounded-lg mr-3"><i class="fas fa-id-card text-xl"></i></div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">Acessar Clube Quintal</p>
+                            <p class="text-xs text-purple-100">Adicionar serviço e gerar card</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-external-link-alt ml-4"></i>
+                </a>
+            </div>
+
+            <div class="bg-white p-1 rounded-lg shadow-md mb-2">
+                <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Enviar Card</span>
+                    <button onclick="copyToClipboard('msg-7')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                </div>
+                <div class="p-5 script-box bg-white">
+                    <p id="msg-7" class="whitespace-pre-line text-gray-800">Ah! Antes de encerrar, aqui está seu cartão do Clube Quintal+, nosso programa com benefícios e recompensas para clientes:👇
+(Enviar card)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 7: ENCERRAMENTO (Antigo 8) -->
+        <section id="step-7" class="mb-20 scroll-mt-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">7</span>
+                Encerramento
+            </h2>
+            <div class="bg-white p-1 rounded-lg shadow-md mb-2">
+                <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Despedida</span>
+                    <button onclick="copyToClipboard('msg-8')" class="text-green-600 hover:text-green-800 text-sm font-semibold"><i class="far fa-copy mr-1"></i> Copiar</button>
+                </div>
+                <div class="p-5 script-box bg-white">
+                    <p id="msg-8" class="whitespace-pre-line text-gray-800">Se precisar de algo até o dia do serviço, é só me chamar.
+A Quintal Limpo agradece pela confiança! 💚🌱</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TOAST -->
+    <div id="toast"><i class="fas fa-check-circle mr-2"></i> Mensagem copiada!</div>
+
+    <script>
+        function showToast() {
+            var x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        function copyToClipboard(elementId) {
+            var text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(function() { showToast(); }, function(err) {
+                // Fallback
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try { document.execCommand('copy'); showToast(); } catch (err) { console.error('Err', err); }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function showServiceScript() {
+            const contents = document.querySelectorAll('.service-content');
+            contents.forEach(div => div.classList.add('hidden'));
+            const selection = document.getElementById('service-select').value;
+            if (selection) {
+                const target = document.getElementById('content-' + selection);
+                if(target) target.classList.remove('hidden');
+            }
+        }
+
+        function showPayment(type) {
+            document.getElementById('pay-pix').classList.add('hidden');
+            document.getElementById('pay-card').classList.add('hidden');
+            
+            const tabs = document.querySelectorAll('.payment-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('text-green-600', 'border-b-2', 'border-green-500');
+                tab.classList.add('text-gray-500');
+            });
+
+            if (type === 'pix') {
+                document.getElementById('pay-pix').classList.remove('hidden');
+                const tab = document.getElementById('tab-pix');
+                tab.classList.add('text-green-600', 'border-b-2', 'border-green-500');
+                tab.classList.remove('text-gray-500');
+            } else {
+                document.getElementById('pay-card').classList.remove('hidden');
+                const tab = document.getElementById('tab-card');
+                tab.classList.add('text-green-600', 'border-b-2', 'border-green-500');
+                tab.classList.remove('text-gray-500');
+            }
+        }
+
+        function setActive(element) {
+            const links = document.querySelectorAll('.sidebar-item');
+            links.forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
