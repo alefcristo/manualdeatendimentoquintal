@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Atendimento - Quintal Limpo</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -39,7 +36,6 @@
 </head>
 <body class="h-screen flex overflow-hidden">
 
-    <!-- SIDEBAR -->
     <aside class="w-64 bg-white shadow-lg hidden md:flex flex-col z-10 h-full">
         <div class="p-6 border-b border-gray-100">
             <h1 class="text-xl font-bold text-green-700"><i class="fas fa-leaf mr-2"></i>Quintal Limpo</h1>
@@ -59,13 +55,10 @@
         </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth relative">
         
-        <!-- Mobile Header -->
         <div class="md:hidden mb-6"><h1 class="text-xl font-bold text-green-700">Quintal Limpo - Manual</h1></div>
 
-        <!-- STEP 0 -->
         <section id="step-0" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">0</span>
@@ -81,7 +74,6 @@
             </div>
         </section>
 
-        <!-- STEP 1 -->
         <section id="step-1" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">1</span>
@@ -101,14 +93,12 @@ Um momento, por favor. 🌱</p>
             </div>
         </section>
 
-        <!-- STEP 2 -->
         <section id="step-2" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">2</span>
                 Verificação do Profissional
             </h2>
             
-            <!-- LINK DA FERRAMENTA -->
             <div class="mb-4">
                 <a href="https://gestaoprofissionaisparceiros.vercel.app/" target="_blank" class="tool-link flex items-center justify-between w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg shadow-md group">
                     <div class="flex items-center">
@@ -132,14 +122,12 @@ Um momento, por favor. 🌱</p>
             </div>
         </section>
 
-        <!-- STEP 3 -->
         <section id="step-3" class="mb-10 scroll-mt-10 bg-gray-50 p-4 rounded-xl border border-gray-200">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">3</span>
                 Confirmação & Detalhes
             </h2>
             
-            <!-- Mensagem Padrão -->
             <div class="bg-white p-1 rounded-lg shadow-md mb-6">
                 <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
                     <span class="text-xs font-bold text-gray-500 uppercase">Confirmação Inicial (Padrão)</span>
@@ -151,7 +139,6 @@ Antes de confirmarmos, preciso só alinhar um detalhe rápido do serviço.</p>
                 </div>
             </div>
 
-            <!-- SELETOR DE SERVIÇO COM DESTAQUE -->
             <div class="mb-6 selector-highlight p-4 rounded-lg">
                 <label for="service-select" class="block text-orange-700 font-bold mb-2 flex items-center">
                     <i class="fas fa-exclamation-triangle mr-2"></i> SELECIONE O CENÁRIO ESPECÍFICO:
@@ -171,8 +158,6 @@ Antes de confirmarmos, preciso só alinhar um detalhe rápido do serviço.</p>
                 </div>
             </div>
 
-            <!-- BLOCOS DE SERVIÇO -->
-            <!-- 3.A Faxina -->
             <div id="content-3a" class="service-content hidden animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md border border-blue-200">
                     <div class="p-3 bg-blue-50 border-b border-blue-100 flex justify-between items-center">
@@ -210,7 +195,6 @@ Podemos seguir com a versão básica mesmo?</p>
                 </div>
             </div>
 
-            <!-- 3.B Terreno Sem Entulho -->
             <div id="content-3b" class="service-content hidden animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md border border-green-200">
                     <div class="p-3 bg-green-50 border-b border-green-100 flex justify-between items-center">
@@ -227,7 +211,6 @@ Podemos seguir dessa forma?</p>
                 </div>
             </div>
 
-            <!-- 3.C Terreno Com Entulho -->
             <div id="content-3c" class="service-content hidden animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md border border-green-200">
                     <div class="p-3 bg-green-50 border-b border-green-100 flex justify-between items-center">
@@ -244,7 +227,6 @@ Está tudo certo por aí para continuarmos?</p>
                 </div>
             </div>
 
-            <!-- 3.D Piscina Manutenção -->
             <div id="content-3d" class="service-content hidden animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md border border-cyan-200">
                     <div class="p-3 bg-cyan-50 border-b border-cyan-100 flex justify-between items-center">
@@ -277,7 +259,6 @@ Mas posso te ajudar a reagendar quando estiver tudo pronto.</p>
                 </div>
             </div>
 
-            <!-- 3.E Piscina Choque -->
             <div id="content-3e" class="service-content hidden animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md border border-cyan-200">
                     <div class="p-3 bg-cyan-50 border-b border-cyan-100 flex justify-between items-center">
@@ -303,7 +284,6 @@ Você possui esses equipamentos e produtos disponíveis?</p>
             </div>
         </section>
 
-        <!-- STEP 4: PAGAMENTO (Antigo 5) -->
         <section id="step-4" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">4</span>
@@ -315,7 +295,6 @@ Você possui esses equipamentos e produtos disponíveis?</p>
                 <button onclick="showPayment('card')" id="tab-card" class="payment-tab py-2 px-4 text-gray-500 font-medium hover:text-green-600 focus:outline-none"><i class="far fa-credit-card mr-2"></i>Cartão de Crédito</button>
             </div>
 
-            <!-- PIX Content -->
             <div id="pay-pix" class="payment-content animate-fade-in">
                 <div class="bg-white p-1 rounded-lg shadow-md">
                     <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
@@ -329,7 +308,6 @@ Assim que enviar o comprovante, finalizo o agendamento e confirmo o profissional
                 </div>
             </div>
 
-            <!-- Card Content -->
             <div id="pay-card" class="payment-content hidden animate-fade-in">
                 <div class="internal-note p-4 rounded mb-4 text-sm">
                     <i class="fas fa-calculator mr-1"></i> <strong>Atenção:</strong> Simule a taxa do gateway antes.
@@ -359,12 +337,25 @@ Assim que o pagamento for aprovado, confirmo o profissional.</p>
             </div>
         </section>
 
-        <!-- STEP 5: CONFIRMAÇÃO (Antigo 6) -->
         <section id="step-5" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">5</span>
                 Confirmação Final
             </h2>
+            
+            <div class="mb-4">
+                <a href="https://drive.google.com/drive/folders/14AxyDazWne_-_gVo2LN1JsWv1Esj-Op8?usp=sharing" target="_blank" class="tool-link flex items-center justify-between w-full md:w-auto bg-yellow-600 hover:bg-yellow-700 text-white p-4 rounded-lg shadow-md group">
+                    <div class="flex items-center">
+                        <div class="bg-yellow-500 p-2 rounded-lg mr-3"><i class="fas fa-id-badge text-xl"></i></div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm">Crachá Virtual do Parceiro</p>
+                            <p class="text-xs text-yellow-100">Acessar e enviar ao cliente</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-external-link-alt ml-4"></i>
+                </a>
+            </div>
+
             <div class="bg-white p-1 rounded-lg shadow-md mb-2">
                 <div class="p-3 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
                     <span class="text-xs font-bold text-gray-500 uppercase tracking-wide">Pagamento Recebido</span>
@@ -381,14 +372,12 @@ Qualquer dúvida, estou aqui!</p>
             </div>
         </section>
 
-        <!-- STEP 6: CLUBE QUINTAL+ (Antigo 7) -->
         <section id="step-6" class="mb-10 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">6</span>
                 Clube Quintal+
             </h2>
             
-            <!-- LINK DA FERRAMENTA -->
             <div class="mb-4">
                 <a href="https://clubequintal.vercel.app/" target="_blank" class="tool-link flex items-center justify-between w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg shadow-md group">
                     <div class="flex items-center">
@@ -414,7 +403,6 @@ Qualquer dúvida, estou aqui!</p>
             </div>
         </section>
 
-        <!-- STEP 7: ENCERRAMENTO (Antigo 8) -->
         <section id="step-7" class="mb-20 scroll-mt-10">
             <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
                 <span class="bg-green-100 text-green-800 text-sm font-semibold mr-3 px-2.5 py-0.5 rounded border border-green-400">7</span>
@@ -434,7 +422,6 @@ A Quintal Limpo agradece pela confiança! 💚🌱</p>
 
     </main>
 
-    <!-- TOAST -->
     <div id="toast"><i class="fas fa-check-circle mr-2"></i> Mensagem copiada!</div>
 
     <script>
